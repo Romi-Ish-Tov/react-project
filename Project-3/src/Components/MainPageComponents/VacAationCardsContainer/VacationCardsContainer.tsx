@@ -7,31 +7,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleModalLogin } from "../../../Redux/Features/ModalsController";
 import { VacationClass } from "../../../Types/class/Vacation";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { UserClass } from "../../../Types/class/UserClass";
 import { CheckoutContext, vacationIdContext } from "../../../Redux/Context";
 import axios from "axios";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { setVacationsData } from "../../../Redux/Features/VacationsController"
 import initDeleteAttempt from "../../../Utils/DeleteVacation";
 import "./VacationCardsContainer.css"
+import FavoriteBtnIcon from "./FavoriteBtnIcon/FavoriteBtnIcon";
+import { updateFavorites } from "../../../Redux/Features/FavoritesController";
 
 const VacationCardsContainer = (): JSX.Element => {
     const state: any = useSelector(vacation => vacation);
-    const user: UserClass = state.user.user;
+    const user: any = state.user.user;
     let stateVacationsArray: VacationClass[] = state.vacation.vacationsArray;
     const userType = user.userType;
 
     const { vacationId, setVacationId } = useContext(vacationIdContext);
     const { paymentModal, setPaymentModal } = useContext(CheckoutContext);
 
-    const dispatch = useDispatch();
+    const favoritesSet = new Set<number>();
 
+    const dispatch = useDispatch();
     if (state.vacation.vacationsArray.vacationsArray != null) {
         stateVacationsArray = state.vacation.vacationsArray.vacationsArray;
     }
 
     const toggleModalOnClick = () => {
-        dispatch(toggleModalLogin())
+        console.log(userType)
+        userType != "guest" ? console.log() : dispatch(toggleModalLogin())   
     }
 
     const onClickCart = (index: number) => {
@@ -44,31 +48,8 @@ const VacationCardsContainer = (): JSX.Element => {
         }
     }
 
-    const addToFavorites = (index: number) => {
 
-    }
 
-    const onClickFavorite = (index: number) => {
-        if (user.userType == 'guest') {
-            return;
-        }
-        else {
-            addToFavorites(index)
-        }
-    }
-
-    const removeFromFavorites = (index: number) => {
-
-    }
-
-    const onClickUnFavorite = (index: number) => {
-        if (user.userType == 'guest') {
-            return;
-        }
-        else {
-            removeFromFavorites(index)
-        }
-    }
 
     const onClickDelete = (index: number) => {
         initDeleteAttempt(index)
@@ -86,43 +67,23 @@ const VacationCardsContainer = (): JSX.Element => {
     }, [])
 
     const initFavoritesAttepmt = async () => {
-        const response = await axios.post<any>('http://localhost:3001/likes/requestFavoriteVacations', { userId: user.id });
-        let favoriteVacationsResponse: number[] = response.data;
-        sortVacationArrayByFavorites(favoriteVacationsResponse)
+        try {
+            const response = await axios.get<any>(`http://localhost:3001/vacations/${user.userId}`);
+            let favoriteVacationsResponse: number[] = response.data;
+
+            dispatch(setVacationsData({
+                vacationsArray: favoriteVacationsResponse
+            }))
+        }
+        catch (e: any) {
+            console.error(e.message)
+        }
     }
-
-    const sortVacationArrayByFavorites = (favoritesId: number[]) => {
-        let stateVacationsArrayofIds = stateVacationsArray.map((item: VacationClass) => {
-            return item.vacationId
-        })
-
-        let unLikesVacations: number[] = []
-        stateVacationsArrayofIds.map((item: number) => {
-            if (!favoritesId.includes(item)) {
-                unLikesVacations.push(item);
-            }
-        })
-
-
-        let displayedArrayIds: number[] = favoritesId.concat(unLikesVacations);
-
-        let a: VacationClass[] = []
-        displayedArrayIds.map((item: number) => {
-            for (let i = 0; i < displayedArrayIds.length; i++) {
-                if (stateVacationsArray[i].vacationId == item) {
-                    a.push(stateVacationsArray[i])
-                }
-            }
-        })
-        console.log(a);
-    }
-
-
     let dateString = ''
     return (
         <div>
             <div className="vacation-cards-container">
-                {stateVacationsArray.map((item: VacationClass, index: number) => {
+                {stateVacationsArray.map((item: any, index: number) => {
                     { dateString = (`${item.startDate.substring(0, 10).replace(/-/g, '/')} - ${item.returnDate.substring(0, 10).replace(/-/g, '/')}`) }
                     return (
                         < div key={index} className='vacation-card' onClick={() => toggleModalOnClick()} >
@@ -158,18 +119,17 @@ const VacationCardsContainer = (): JSX.Element => {
                                         </CardContent>
                                     </div>
                                     <CardActions disableSpacing >
-                                        {userType == 'guest' && <div>
-                                            <FavoriteIcon className="guest-icon"/>
-                                        </div>}
-                                        {userType == 'customer' && <div>
-                                            <IconButton aria-label="add to favorites" onClick={() => { onClickFavorite(index) }}>
-                                                <FavoriteIcon />
-                                            </IconButton>
-
-                                            <IconButton aria-label="share" onClick={() => onClickCart(index)}>
-                                                <ShoppingCartIcon />
-                                            </IconButton>
-                                        </div>}
+                                        {/* {userType == 'guest' && <div>
+                                            <FavoriteIcon className="guest-icon" />
+                                        </div>} */}
+                                        {/* {userType == 'customer' && <div> */}
+                                        <IconButton aria-label="add to favorites">
+                                            <FavoriteBtnIcon props={item} set={favoritesSet} />
+                                        </IconButton>
+                                        <IconButton aria-label="share" onClick={() => onClickCart(index)}>
+                                            <ShoppingCartIcon />
+                                        </IconButton>
+                                        {/* </div>} */}
                                         {userType == 'admin'
                                             && <div>
                                                 <IconButton aria-label="add to favorites" onClick={() => { onClickEdit(index) }}>
@@ -186,7 +146,6 @@ const VacationCardsContainer = (): JSX.Element => {
                         </div>
                     )
                 })}
-
             </div>
         </div>
     )

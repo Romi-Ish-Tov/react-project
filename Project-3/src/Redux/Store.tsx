@@ -4,6 +4,7 @@ import ModalsController from "./Features/ModalsController";
 import VacationsController from "./Features/VacationsController";
 import UserController from "./Features/UserController";
 import PaymentModalController from "./Features/PaymentModalController";
+import FavoritesController from "./Features/FavoritesController";
 
 export default configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
         vacation: VacationsController,
         modal: ModalsController,
         payment: PaymentModalController,
+        favorites: FavoritesController
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,

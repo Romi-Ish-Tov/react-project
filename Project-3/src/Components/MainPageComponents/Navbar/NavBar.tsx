@@ -8,8 +8,8 @@ import { UserClass } from '../../../Types/class/UserClass';
 import { toggleModalLogin, toggleModalRegister } from "../../../Redux/Features/ModalsController";
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../../Redux/Features/UserController';
-import "./Navbar.css";
 import { updateOrder } from '../../../Redux/Features/PaymentModalController';
+import "./Navbar.css";
 
 const ResponsiveAppBar = () => {
   const state: any = useSelector(state => state);
