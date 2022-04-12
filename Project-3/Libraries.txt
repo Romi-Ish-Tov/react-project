@@ -1,0 +1,8 @@
+library:
+
+
+react:
+ - react-router-dom
+ - @types/react-router-dom
+ - react-redux
+

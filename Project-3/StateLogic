@@ -1,0 +1,8 @@
+only object kept in state => User; 
+any change to user get's dispatched to current state => upon change in state; =>
+send axious action to update dataBase;
+
+add reducers: 
+book vacation
+delete vacation
+follow vacation

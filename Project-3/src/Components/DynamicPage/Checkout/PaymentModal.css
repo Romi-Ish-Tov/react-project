@@ -1,0 +1,36 @@
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: white;
+    opacity: 0.5;
+}
+  
+.payment-modal .modal-body {
+    position: fixed;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%);
+    opacity: 1;
+    z-index: 200;
+    text-align: center;
+    margin: 0%; 
+}
+
+.MuiPaper-rounded  {
+    margin-top: 4% !important;
+}
+
+.MuiAvatar-colorDefault {
+    background-color: #448aff !important;
+}
+
+.MuiStepper-root.MuiStepper-horizontal.css-64ubn6-MuiStepper-root{
+  padding-top: 0% !important;
+  padding-bottom: 0% !important;
+}
+
+#back-payment-btn {
+    color: #3f51b5 !important;
+}

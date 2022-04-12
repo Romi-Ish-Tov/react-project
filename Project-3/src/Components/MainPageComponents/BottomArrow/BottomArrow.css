@@ -1,0 +1,27 @@
+.BottomNavBarArrows > button {
+    border-radius: 5%;
+    display: inline-block;
+    color: #0e0f0f;
+    border: none;
+    background-color: white;
+    width: 50px;
+    height: 40px;
+    transition-duration: 1s;
+}
+
+.buttonholder > * {
+    width: 25px !important;
+    height: 25px !important;
+}
+
+.BottomNavBarArrows > button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+    transform: translate(0, 50%);
+}
+
+.BottomNavBarArrows {
+    display: flex;
+    justify-content: center;
+    height: 100px;  
+}

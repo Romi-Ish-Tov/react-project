@@ -1,0 +1,64 @@
+.card-image>img {
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    flex: 1;
+    display: flex;
+}
+
+.card-wrapper {
+    padding: 0% !important;
+}
+
+.card {
+    border-radius: 0% !important;
+}
+
+.nextArrow.arrow {
+    color: rgb(37, 62, 132);
+    position: absolute;
+    top: 30%;
+    right: 3%;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.prevArrow.arrow {
+    color: rgb(37, 62, 132);
+    position: absolute;
+    top: 30%;
+    left: 3%;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.nextArrow.arrow:hover {
+    color: rgb(76, 86, 175);
+}
+
+.prevArrow.arrow:hover {
+    color: rgb(76, 86, 175);
+}
+
+.slick-slider {
+    background-color: black !important;
+} 
+
+.details{
+    background-color: black !important;
+    color: white !important;
+}
+
+.BottomNavBarArrows {
+    background-color: black !important;
+}
+
+.BottomNavBarArrows > button {
+    background-color: black !important;
+    color: white !important
+}
+
+.details > h2 {
+    color: white !important;
+}

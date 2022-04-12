@@ -1,0 +1,61 @@
+.vacation-cards-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.vacation-card {
+    margin: 1%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.image-card > img {
+    height: 200px !important;
+}
+
+.card-text {
+    max-height: 100px;
+    overflow: auto !important; 
+    overflow: wrap;
+}
+
+.card-text::-webkit-scrollbar {
+    width: 10px;
+}
+
+.card-text::-webkit-scrollbar-thumb {
+    background-color: #7775;
+    border-radius: 20px;
+}
+
+.card-text::-webkit-scrollbar-thumb:hover {
+    background-color: #777;
+}
+
+.card-text::-webkit-scrollbar-track {
+    background-color: #5555;
+    border-radius: 20px;
+}
+
+.card-text::-webkit-scrollbar-track:hover {
+    background-color: #555;
+}
+
+.css-1ri6ub7-MuiPaper-root-MuiCard-root {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.favoriteBtn {
+    color: red !important;
+}
+
+.guest-icon {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+/* .css-i4bv87-MuiSvgIcon-root {
+    font-size: 2.5rem !important;
+} */

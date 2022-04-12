@@ -1,0 +1,12 @@
+loading info piece by piece for better UX..
+
+Book without login> let NextVacation > Login > OpenVacation(NextVacation);
+
+login> verify fields > verify info in dataBase > return succsessful login/false;
+
+register > verify fields > check existing in DB > Create in DB > return successful login;
+
+stateless;
+
+architecture;
+

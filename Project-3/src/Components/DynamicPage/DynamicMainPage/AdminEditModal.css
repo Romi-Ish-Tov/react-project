@@ -1,0 +1,7 @@
+.admin-modal-container {
+    width: 80% !important;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2%;
+}

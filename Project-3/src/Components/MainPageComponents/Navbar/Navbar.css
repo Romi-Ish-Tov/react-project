@@ -1,0 +1,21 @@
+.card-wrapper {
+    padding: none !important;
+}
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+    background-color: black !important;
+    color: white !important;
+}
+
+.MuiButton-textPrimary {
+    color: white !important;
+}
+
+.MuiButton-textPrimary:hover  {
+    color: rgb(162, 162, 165) !important
+}
+
+.css-mf1cb5-MuiButtonBase-root-MuiIconButton-root{    
+    color: white !important;
+    
+}
