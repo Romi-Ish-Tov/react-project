@@ -23,13 +23,13 @@ import initLoginAttempt from "../../../Utils/Login";
 import decryptToken from "../../../Utils/token";
 import "./Register.css"
 
-interface State {
-    amount: string;
-    password: string;
-    weight: string;
-    weightRange: string;
-    showPassword: boolean;
-}
+// interface State {
+//     amount: string;
+//     password: string;
+//     weight: string;
+//     weightRange: string;
+//     showPassword: boolean;
+// }
 
 const schema = yup.object().shape({
     userName: yup.string().required().matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field ").min(4).max(10),
@@ -137,7 +137,7 @@ const Register = () => {
                                     <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
                                 </Grid>
                                 <Box mb={2}>
-                                    <TextField
+                                    <TextField  
                                         autoFocus
                                         label="full name"
                                         fullWidth
@@ -272,7 +272,7 @@ const Register = () => {
                                         control={<Checkbox name="checkedA" />}
                                         label="I accept the terms and conditions."
                                     />
-                                    <Button onSubmit={handleSubmit(onSubmit)} type='submit' variant='contained' color='primary'>Sign up</Button>
+                                    <Button className="btn-register" onSubmit={handleSubmit(onSubmit)} type='submit' variant='contained' color='primary'>Sign up</Button>
                                 </Box>
                             </Paper>
                         </Grid>

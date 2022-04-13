@@ -13,9 +13,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { setVacationsData } from "../../../Redux/Features/VacationsController"
 import initDeleteAttempt from "../../../Utils/DeleteVacation";
-import "./VacationCardsContainer.css"
 import FavoriteBtnIcon from "./FavoriteBtnIcon/FavoriteBtnIcon";
-import { updateFavorites } from "../../../Redux/Features/FavoritesController";
+import "./VacationCardsContainer.css"
 
 const VacationCardsContainer = (): JSX.Element => {
     const state: any = useSelector(vacation => vacation);
@@ -27,6 +26,7 @@ const VacationCardsContainer = (): JSX.Element => {
     const { paymentModal, setPaymentModal } = useContext(CheckoutContext);
 
     const favoritesSet = new Set<number>();
+    const favoritesArray: number[] = []
 
     const dispatch = useDispatch();
     if (state.vacation.vacationsArray.vacationsArray != null) {
@@ -34,7 +34,6 @@ const VacationCardsContainer = (): JSX.Element => {
     }
 
     const toggleModalOnClick = () => {
-        console.log(userType)
         userType != "guest" ? console.log() : dispatch(toggleModalLogin())   
     }
 
@@ -47,9 +46,6 @@ const VacationCardsContainer = (): JSX.Element => {
             setVacationId(stateVacationsArray[index]);
         }
     }
-
-
-
 
     const onClickDelete = (index: number) => {
         initDeleteAttempt(index)
@@ -124,7 +120,7 @@ const VacationCardsContainer = (): JSX.Element => {
                                         </div>} */}
                                         {/* {userType == 'customer' && <div> */}
                                         <IconButton aria-label="add to favorites">
-                                            <FavoriteBtnIcon props={item} set={favoritesSet} />
+                                            <FavoriteBtnIcon vacationItem={item} array={favoritesArray} />
                                         </IconButton>
                                         <IconButton aria-label="share" onClick={() => onClickCart(index)}>
                                             <ShoppingCartIcon />

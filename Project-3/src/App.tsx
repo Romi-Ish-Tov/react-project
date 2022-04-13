@@ -9,6 +9,7 @@ import DynamicPageLayout from './Components/DynamicPage/DynamicMainPage/DynamicP
 import VacationManagment from './Components/AdminViewComponent/VacationManagment/VacationManagment';
 import userState from './Types/states/userState';
 import AdminEditModal from './Components/DynamicPage/DynamicMainPage/AdminEditModal';
+import DataGraphs from './Components/AdminViewComponent/DataGraphs/DataGraphs';
 import "./App.css";
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         <Route path="/" element={<GuestPageLayout />} />
         <Route path="/index" element={<DynamicPageLayout />} />
         <Route path="/vacationManagment" element={<VacationManagment />} />
+        <Route path="/graph" element={<DataGraphs />} />
         <Route path="/test" element={<AdminEditModal />} />
       </Routes>
     </div>

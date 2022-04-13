@@ -1,20 +1,30 @@
+import { ActionTypes } from "@mui/base";
 import { createSlice } from "@reduxjs/toolkit";
-const emptySet:any = new Set
+const numberArray : number[] = [8]
+
+const filterArray = (array: number[], id: number) => {
+    let filteredId = array.filter((item: number) => item != id);
+    console.log(filteredId);
+    return filteredId;
+    
+}
+
 export const FavoritesController = createSlice(
-    {   
+    {
         name: 'Favorites',
         initialState: {
-           setFavoritesVacationsId: emptySet
+            favoritesArray: numberArray
         },
         reducers: {
-            updateFavorites: (state, action) => {
-                state.setFavoritesVacationsId = state.setFavoritesVacationsId.has(action.payload) ? state.setFavoritesVacationsId.delete(action.payload) : state.setFavoritesVacationsId.add(action.payload)
+            addToFavorites: (state, action) => {
+                state.favoritesArray.push(action.payload)
+            },
+            removeFromFavorites: (state, action) => {
+                state.favoritesArray = filterArray(state.favoritesArray, action.payload)
             }
-            
-
         }
     }
 );
 
-export const { updateFavorites } = FavoritesController.actions;
+export const { addToFavorites, removeFromFavorites } = FavoritesController.actions;
 export default FavoritesController.reducer;

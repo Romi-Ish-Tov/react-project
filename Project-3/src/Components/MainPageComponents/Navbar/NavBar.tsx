@@ -41,7 +41,7 @@ const ResponsiveAppBar = () => {
     browseVacations();
 
   };
-  const statictics = () => { };
+  const statictics = () => {  navigate("/graph") };
   const vacationManagement = () => { navigate("/vacationManagment") };
 
   let renderByObject = {

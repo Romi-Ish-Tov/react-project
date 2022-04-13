@@ -27,6 +27,11 @@
     background-color: #448aff !important;
 }
 
-.modal-container {
-    max-height: 90px;
+/* .MuiFormControlLabel-root {
+    margin-top: 3% !important;
 }
+
+.MuiFormControl-root {
+    max-height: 50px !important;
+    margin-top: 5% !important;
+} */
