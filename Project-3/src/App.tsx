@@ -6,9 +6,9 @@ import { fetchUserById, setVacationsData } from './Redux/Features/VacationsContr
 import DynamicPageLayout from './Components/DynamicPage/DynamicMainPage/DynamicPageLayout';
 import VacationManagment from './Components/AdminViewComponent/VacationManagment/VacationManagment';
 import userState from './Types/states/userState';
-import DataGraphs from './Components/AdminViewComponent/DataGraphs/DataGraphs';
 import initVacations from './Utils/InitVacations';
 import NewVacation from './Components/AdminViewComponent/NewVacation/NewVacation';
+import StatisticsPage from './Components/AdminViewComponent/Table/StatisticsPage/StatisticPage';
 import "./App.css";
 
 function App() {
@@ -66,8 +66,7 @@ function App() {
         <Route path="/" element={<GuestPageLayout />} />
         <Route path="/index" element={<DynamicPageLayout />} />
         <Route path="/vacationManagment" element={<VacationManagment />} />
-        <Route path="/graph" element={<DataGraphs />} />
-        <Route path="/test" element={<NewVacation />} />
+        <Route path="/graph" element={<StatisticsPage />} />
       </Routes>
     </div>
   );

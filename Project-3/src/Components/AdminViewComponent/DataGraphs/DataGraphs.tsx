@@ -40,7 +40,7 @@ const data = [
   
 const Graph = (): JSX.Element => {
     return (
-        <BarChart width={730} height={250} data={data}>
+        <BarChart width={1250} height={500} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
