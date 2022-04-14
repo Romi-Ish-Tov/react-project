@@ -10,7 +10,6 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from "react-router-dom";
 import { UserClass } from "../../../Types/class/UserClass";
-import axios from "axios";
 import decryptToken from "../../../Utils/token";
 import initLoginAttempt from "../../../Utils/Login";
 import userState from "../../../Types/states/userState";
@@ -50,7 +49,6 @@ const LoginModal = (): JSX.Element => {
             email: email,
             password: password
         }
-
         try {
             const loginResponse = await initLoginAttempt(loginPayload);
             dispatch(login(loginResponse));
@@ -64,7 +62,7 @@ const LoginModal = (): JSX.Element => {
             dispatch(updateOrder(paymentDetails))
         }
         catch (e: any) {
-            alert('email and password are wrong. please try again.')
+            alert('Email or password are wrong. please try again.')
         }
     }
 

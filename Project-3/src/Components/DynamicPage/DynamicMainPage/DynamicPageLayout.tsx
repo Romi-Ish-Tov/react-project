@@ -8,12 +8,16 @@ import ImageSlider from "../../MainPageComponents/Slider/ImageSlider";
 import VacationCardsContainer from "../../MainPageComponents/VacAationCardsContainer/VacationCardsContainer";
 import PaymentModal from "../Checkout/PaymentModal";
 import { CheckoutContext, vacationIdContext } from '../../../Redux/Context';
+import EditVacationModal from "../../AdminViewComponent/EditVacationModal/EditVacationModal";
 
 const DynamicPageLayout = () => {
     const state: any = useSelector(state => state);
     const user: any = state.user.user;
-    const navigate = useNavigate()
     const userType = user.userType;
+    const editModal = state.modal.modalEdit
+    
+    const navigate = useNavigate()
+
     useEffect(() => {
 
         if (userType != 'admin' && userType != 'customer') {
@@ -32,6 +36,7 @@ const DynamicPageLayout = () => {
             <CheckoutContext.Provider value={contextPaymentModal}>
                 <vacationIdContext.Provider value={contextVacationId}>
                     {paymentModal && <PaymentModal />}
+                    {editModal && <EditVacationModal/>}
                     <ResponsiveAppBar />
                     <ImageSlider />
                     <Link to="vacation-cards-container" smooth={true} duration={1000}> <BottomArrow /> </Link>

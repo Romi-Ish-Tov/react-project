@@ -1,0 +1,12 @@
+.edit-new-vacation {
+    width: 345px !important;
+}
+
+.edit-new-vacation-avatar {
+    position: absolute;
+    left: 50%;
+}
+
+#edit-new-vacation-id {
+    opacity: 0.5;
+}

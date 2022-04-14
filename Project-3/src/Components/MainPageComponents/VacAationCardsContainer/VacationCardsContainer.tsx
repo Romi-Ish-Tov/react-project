@@ -4,7 +4,7 @@ import { blue } from "@mui/material/colors";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVertIcon from "@mui/icons-material/MoreVert"
 import { useDispatch, useSelector } from "react-redux";
-import { toggleModalLogin } from "../../../Redux/Features/ModalsController";
+import { toggleModalEdit, toggleModalLogin } from "../../../Redux/Features/ModalsController";
 import { VacationClass } from "../../../Types/class/Vacation";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { CheckoutContext, vacationIdContext } from "../../../Redux/Context";
@@ -15,6 +15,9 @@ import { setVacationsData } from "../../../Redux/Features/VacationsController"
 import initDeleteAttempt from "../../../Utils/DeleteVacation";
 import FavoriteBtnIcon from "./FavoriteBtnIcon/FavoriteBtnIcon";
 import "./VacationCardsContainer.css"
+import EditVacation from "../../../Utils/EditVacation";
+import { EditVacationRedux } from "../../../Redux/Features/EditVacationController";
+import NewVacation from "../../AdminViewComponent/NewVacation/NewVacation";
 
 const VacationCardsContainer = (): JSX.Element => {
     const state: any = useSelector(vacation => vacation);
@@ -22,10 +25,11 @@ const VacationCardsContainer = (): JSX.Element => {
     let stateVacationsArray: VacationClass[] = state.vacation.vacationsArray;
     const userType = user.userType;
 
+    const [isEditModal, setIsEditModal] = useState(false);
+
     const { vacationId, setVacationId } = useContext(vacationIdContext);
     const { paymentModal, setPaymentModal } = useContext(CheckoutContext);
 
-    const favoritesSet = new Set<number>();
     const favoritesArray: number[] = []
 
     const dispatch = useDispatch();
@@ -34,7 +38,7 @@ const VacationCardsContainer = (): JSX.Element => {
     }
 
     const toggleModalOnClick = () => {
-        userType != "guest" ? console.log() : dispatch(toggleModalLogin())   
+        userType != "guest" ? console.log() : dispatch(toggleModalLogin())
     }
 
     const onClickCart = (index: number) => {
@@ -50,11 +54,6 @@ const VacationCardsContainer = (): JSX.Element => {
     const onClickDelete = (index: number) => {
         initDeleteAttempt(index)
     }
-
-    const onClickEdit = (index: number) => {
-
-    }
-
 
     useEffect(() => {
         if (user.userType != 'guest') {
@@ -79,6 +78,7 @@ const VacationCardsContainer = (): JSX.Element => {
     return (
         <div>
             <div className="vacation-cards-container">
+                <NewVacation></NewVacation>
                 {stateVacationsArray.map((item: any, index: number) => {
                     { dateString = (`${item.startDate.substring(0, 10).replace(/-/g, '/')} - ${item.returnDate.substring(0, 10).replace(/-/g, '/')}`) }
                     return (
@@ -128,10 +128,12 @@ const VacationCardsContainer = (): JSX.Element => {
                                         {/* </div>} */}
                                         {userType == 'admin'
                                             && <div>
-                                                <IconButton aria-label="add to favorites" onClick={() => { onClickEdit(index) }}>
+                                                <IconButton aria-label="add to favorites" onClick={() => {
+                                                    dispatch(toggleModalEdit())
+                                                    dispatch(EditVacationRedux(item))
+                                                }}>
                                                     <EditIcon />
                                                 </IconButton>
-
                                                 <IconButton aria-label="share" onClick={() => onClickDelete(item.vacationId)}>
                                                     <DeleteIcon />
                                                 </IconButton>
@@ -143,7 +145,7 @@ const VacationCardsContainer = (): JSX.Element => {
                     )
                 })}
             </div>
-        </div>
+        </div >
     )
 }
 

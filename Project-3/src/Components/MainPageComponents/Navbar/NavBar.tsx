@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserClass } from '../../../Types/class/UserClass';
 import { toggleModalLogin, toggleModalRegister } from "../../../Redux/Features/ModalsController";
 import { useNavigate } from 'react-router-dom';
+import { updateOrder} from '../../../Redux/Features/PaymentModalController';
 import { logout } from '../../../Redux/Features/UserController';
-import { updateOrder } from '../../../Redux/Features/PaymentModalController';
+import { onLogout as fuckthisromiiknowwhatimdoing  } from '../../../Redux/Features/VacationsController';
+
 import "./Navbar.css";
 
 const ResponsiveAppBar = () => {
@@ -29,6 +31,7 @@ const ResponsiveAppBar = () => {
   const onClickLogout = () => {
     dispatch(logout())
     dispatch(updateOrder(state));
+    dispatch(fuckthisromiiknowwhatimdoing())
     navigate('/')
   }
 

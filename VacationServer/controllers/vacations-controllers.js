@@ -42,6 +42,7 @@ router.post('/addVacation', async (requset, response) => {
 })
 
 router.patch('/:id', async (requset, response) => {
+    console.log(requset.body);
     const updateVacation = requset.body
     const vacationId = requset.params.id
     
@@ -49,7 +50,7 @@ router.patch('/:id', async (requset, response) => {
 
     try {
         await vacationsLogic.editVacation(updateVacation);
-        response.json()
+        response.json();
     }
     catch (e) {
         console.error(e);

@@ -64,22 +64,31 @@ const Register = () => {
     }
 
     const initRegisterAttepmt = async (data: any) => {
-        let userRegisterRequest = { 'fullName': data.fullName, 'userName': data.userName, 'email': data.email, 'password': data.password }
-        const response = await axios.post<any>('http://localhost:3001/users', userRegisterRequest);
-        let userRegisterResponse = response.data
-       
-        const decodedToken:any = decryptToken(userRegisterResponse.token);
+        try {
+            let userRegisterRequest = { 'fullName': data.fullName, 'userName': data.userName, 'email': data.email, 'password': data.password }
+            const response = await axios.post<any>('http://localhost:3001/users', userRegisterRequest);
+            let userRegisterResponse = response.data
 
-        const newUserState = {
-            fullName: userRegisterResponse.fullName,
-            email: userRegisterResponse.email,
-            userType: decodedToken.userType
+            const decodedToken: any = decryptToken(userRegisterResponse.token);
+
+            const newUserState = {
+                fullName: userRegisterResponse.fullName,
+                email: userRegisterResponse.email,
+                userType: decodedToken.userType
+            }
+
+            if (userRegisterResponse) {
+                dispatch(login(newUserState));
+                dispatch(toggleModalRegister());
+                navigate('/index');
+            }
         }
-        if (userRegisterResponse) {
-            dispatch(login(newUserState));
-            dispatch(toggleModalRegister());
-            navigate('/index');
+        catch (e: any) {
+            console.error(e.message);
+            alert(e.message)
+
         }
+
     }
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => handleRegister(data);
@@ -137,7 +146,7 @@ const Register = () => {
                                     <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
                                 </Grid>
                                 <Box mb={2}>
-                                    <TextField  
+                                    <TextField
                                         autoFocus
                                         label="full name"
                                         fullWidth

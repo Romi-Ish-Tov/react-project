@@ -61,10 +61,10 @@ export default function Checkout() {
       price: vacationId.price,
       orderDate: currentDate,
     }
-
-    const response = await axios.post<any>('http://localhost:3001/orders/handleNewOrder', orderDetailsRequest);
-    let userRegisterResponse = response.data;
-    console.log(userRegisterResponse)
+  
+    // const response = await axios.post<any>('http://localhost:3001/orders/handleNewOrder', orderDetailsRequest);
+    // let userRegisterResponse = response.data;
+    // console.log(userRegisterResponse)
   }
 
   const handleNext = () => {

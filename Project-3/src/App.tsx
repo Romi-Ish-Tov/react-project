@@ -2,18 +2,17 @@ import React, { useEffect, useMemo, useState } from 'react';
 import GuestPageLayout from "./Components/MainPageComponents/GuestPageLayout/GuestPageLayout";
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { VacationClass } from './Types/class/Vacation';
-import { setVacationsData } from './Redux/Features/VacationsController';
+import { fetchUserById, setVacationsData } from './Redux/Features/VacationsController';
 import DynamicPageLayout from './Components/DynamicPage/DynamicMainPage/DynamicPageLayout';
 import VacationManagment from './Components/AdminViewComponent/VacationManagment/VacationManagment';
 import userState from './Types/states/userState';
-import AdminEditModal from './Components/DynamicPage/DynamicMainPage/AdminEditModal';
 import DataGraphs from './Components/AdminViewComponent/DataGraphs/DataGraphs';
+import initVacations from './Utils/InitVacations';
+import NewVacation from './Components/AdminViewComponent/NewVacation/NewVacation';
 import "./App.css";
 
 function App() {
-  
+
   const guest: userState = {
     fullName: 'guest',
     userType: 'guest',
@@ -21,7 +20,7 @@ function App() {
     id: 0
   }
 
-  const state:any = useSelector(state => state)
+  const state: any = useSelector(state => state)
   const userId = 0
   const dispatch = useDispatch();
 
@@ -29,16 +28,37 @@ function App() {
   const value: any = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   useEffect(() => {
-    initVacations();
+    initAllVacations();
   }, []);
 
-  async function initVacations() {
-    const response = await axios.get<VacationClass[]>(`http://localhost:3001/vacations/${userId}`);
-    let vacationsModel = response.data;
-    dispatch(setVacationsData({
-      vacationsArray: vacationsModel,
-    }));
+
+  const initAllVacations = async () => {
+    try {
+      let vacationsArrayResponse = await initVacations(userId);
+      dispatch(setVacationsData({
+        vacationsArray: vacationsArrayResponse,
+      }));
+    }
+    catch (e: any) {
+      console.error(e.message);
+      alert('Something went wrong. Please try again later!')
+    }
   }
+
+  dispatch(fetchUserById())
+
+  // async function initVacations() {
+  //   try {
+  //     const response = await axios.get<VacationClass[]>(`http://localhost:3001/vacations/${userId}`);
+  //     let vacationsModel = response.data;
+  //     dispatch(setVacationsData({
+  //       vacationsArray: vacationsModel,
+  //     }));
+  //   } catch (e: any) {
+  //     console.error(e.message);
+  //     alert('Something went wrong. Please try again later!')
+  //   }
+  // } 
 
   return (
     <div>
@@ -47,7 +67,7 @@ function App() {
         <Route path="/index" element={<DynamicPageLayout />} />
         <Route path="/vacationManagment" element={<VacationManagment />} />
         <Route path="/graph" element={<DataGraphs />} />
-        <Route path="/test" element={<AdminEditModal />} />
+        <Route path="/test" element={<NewVacation />} />
       </Routes>
     </div>
   );

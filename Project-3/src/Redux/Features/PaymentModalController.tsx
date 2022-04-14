@@ -20,11 +20,14 @@ export const PaymentModalController = createSlice(
                 state.personalOrderDetails.phoneNumber = action.payload.phoneNumber;
                 state.personalOrderDetails.amountOfTravelers = action.payload.amountOfTravelers;
             },
+            logout: (state, action) => {
+                console.log(action.payload)
+            }
         }
     }
 );
 
-export const { updateOrder } = PaymentModalController.actions;
+export const { updateOrder, logout } = PaymentModalController.actions;
 export const changeModalStatus = (state: boolean) => state;
 
 export default PaymentModalController.reducer;

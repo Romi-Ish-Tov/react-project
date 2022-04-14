@@ -6,6 +6,7 @@ export const ModalsController = createSlice(
         initialState: {
             modalLogin: false,
             modalRegister: false,
+            modalEdit: false
         },
         reducers: {
             toggleModalLogin: (state) => {
@@ -15,11 +16,14 @@ export const ModalsController = createSlice(
             toggleModalRegister: (state) => {
                 state.modalRegister = !state.modalRegister;
             },
+            toggleModalEdit: (state) => {
+                state.modalEdit = !state.modalEdit;
+            },
         }
     }
 );
 
-export const { toggleModalLogin, toggleModalRegister } = ModalsController.actions;
+export const { toggleModalLogin, toggleModalRegister, toggleModalEdit } = ModalsController.actions;
 export const changeModalStatus = (state: boolean) => state;
 
 export default ModalsController.reducer;
