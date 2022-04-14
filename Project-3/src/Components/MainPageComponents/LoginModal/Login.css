@@ -13,7 +13,7 @@
 
 .modal-body {
   position: fixed;
-  height: 50vh;
+  height: 70vh;
   top: 10%;
   left: 50%;
   transform: translate(-50%);
@@ -30,4 +30,8 @@
 
 .MuiAvatar-colorDefault {
   background-color: #448aff !important;
+}
+
+.MuiPaper-root MuiPaper-elevation10 MuiPaper-rounded {
+  height: 80vh !important;
 }

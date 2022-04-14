@@ -222,7 +222,6 @@ const Register = () => {
                                         })}
                                         error={!!errors?.password}
                                         helperText={errors?.password ? errors.password.message : null && <PasswordStrengthBar password={password} />}
-
                                         type={values.showPassword ? 'text' : 'password'}
                                         InputProps={{
                                             endAdornment: (

@@ -12,10 +12,10 @@ import { useNavigate } from "react-router-dom";
 import { UserClass } from "../../../Types/class/UserClass";
 import axios from "axios";
 import decryptToken from "../../../Utils/token";
-import "./Login.css";
 import initLoginAttempt from "../../../Utils/Login";
 import userState from "../../../Types/states/userState";
 import { updateOrder } from "../../../Redux/Features/PaymentModalController";
+import "./Login.css";
 
 interface State {
     amount: string;
