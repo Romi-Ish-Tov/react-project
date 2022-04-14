@@ -14,9 +14,9 @@ const deleteVacation = async (id) => {
 }
 
 const addVacation = async (addNewVacation) => {
-    let sql = 'INSERT INTO vacations (destination, description, price, image, start_date, return_date, existing_orders)' +
-        ' VALUES( ?, ?, ?, ?, ?, ?, ? )'
-    let parameters = [addNewVacation.destination, addNewVacation.description, addNewVacation.price, addNewVacation.image, addNewVacation.startDate, addNewVacation.returnDate, addNewVacation.existingOrders]
+    let sql = 'INSERT INTO vacations (destination, description, price, image, start_date, return_date)' +
+        ' VALUES( ?, ?, ?, ?, ?, ? )'
+    let parameters = [addNewVacation.destination, addNewVacation.description, addNewVacation.price, addNewVacation.image, addNewVacation.startDate, addNewVacation.returnDate]
     await connection.executeWithParameters(sql, parameters);
 }
 

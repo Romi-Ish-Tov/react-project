@@ -10,43 +10,70 @@ function EditVacationModal() {
     const dispatch = useDispatch();
 
     const state: any = useSelector(state => state);
-    const editVacation: any = state.editVacation.editVacation
+        
+    const initialValue = () => {
+        if (state.editVacation.editVacation) {
+            return state.editVacation.editVacation
+        }
+        return 'newVacationAttempt'
+    }
+    
+    const editVacation: any = initialValue();
+    
 
-    const [destination, setDestination] = useState(editVacation.destination)
-    const [price, setPrice] = useState(editVacation.price)
-    const [startDate, setStartDate] = useState(editVacation.startDate)
-    const [returnDate, setReturnDate] = useState(editVacation.returnDate)
-    const [imageUrl, setImageUrl] = useState(editVacation.image)
-    const [description, setDescription] = useState(editVacation.description)
+    const [destination, setDestination] = useState("")
+    const [price, setPrice] = useState(0)
+    const [startDate, setStartDate] = useState("")
+    const [returnDate, setReturnDate] = useState("")
+    const [imageUrl, setImageUrl] = useState("")
+    const [description, setDescription] = useState("")
 
     const editVacationPayload = () => {
         const payload = {
-            vacationId: editVacation.vacationId,
             destination: destination,
             price: price,
             startDate: startDate.substring(0, 10),
             returnDate: returnDate.substring(0, 10),
             image: imageUrl,
-            description: description
+            description: description,
+            vacationId: editVacation != 'newVacationAttempt' ? editVacation.vacationId : null
         }
-        editVacationRequest(payload);
+
+        editVacation != 'newVacationAttempt' ? editVacationRequest(payload) : addVacationRequest(payload) ;
     }
 
     const editVacationRequest = async (payload: any) => {
+        validatePayload(payload)
         const url = `http://localhost:3001/vacations/${payload.vacationId}`
         try {
             const response = await axios.patch(url, payload)
             const patchResponse = response.data;
-            console.log(patchResponse);
-            
         }
-
         catch (e: any) {
             console.error(e)
             alert(e)
-
         }
+    }
 
+    const addVacationRequest = async (payload: any) => {
+        const url = `http://localhost:3001/vacations/addVacation`
+        try {
+            const response = await axios.post(url, payload)
+            
+        }
+        catch (e: any) {
+            console.error(e)
+            alert(e)
+        }
+    }
+
+    const validatePayload = (payload: any) => {
+        payload.destination = payload.destination == '' ? payload.destination = editVacation.destination : payload.destination 
+        payload.price = payload.price == '' ? payload.price = editVacation.price : payload.price 
+        payload.startDate = payload.startDate == '' ? payload.startDate = editVacation.startDate.substring(0, 10) : payload.startDate
+        payload.returnDate = payload.returnDate == '' ? payload.returnDate = editVacation.returnDate.substring(0, 10) : payload.returnDate 
+        payload.imageUrl = payload.imageUrl == '' ? payload.imageUrl = editVacation.imageUrl : payload.imageUrl 
+        payload.description = payload.description == '' ? payload.description = editVacation.description : payload.description 
     }
 
     return (
@@ -80,7 +107,7 @@ function EditVacationModal() {
                                         <TextField onChange={(event: any) => { setDescription(event.target.value) }} label="Description" multiline rows={4} placeholder="Description" variant="outlined" fullWidth required />
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Button onClick={editVacationPayload} type="submit" variant="contained" color="primary" fullWidth>Submit</Button>
+                                        <Button onClick={editVacationPayload} variant="contained" color="primary" fullWidth>Submit</Button>
                                     </Grid>
                                 </Grid>
                             </form>

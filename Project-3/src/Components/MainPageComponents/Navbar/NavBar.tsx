@@ -9,7 +9,7 @@ import { toggleModalLogin, toggleModalRegister } from "../../../Redux/Features/M
 import { useNavigate } from 'react-router-dom';
 import { updateOrder} from '../../../Redux/Features/PaymentModalController';
 import { logout } from '../../../Redux/Features/UserController';
-import { onLogout as fuckthisromiiknowwhatimdoing  } from '../../../Redux/Features/VacationsController';
+import { onLogout } from '../../../Redux/Features/VacationsController';
 
 import "./Navbar.css";
 
@@ -31,7 +31,7 @@ const ResponsiveAppBar = () => {
   const onClickLogout = () => {
     dispatch(logout())
     dispatch(updateOrder(state));
-    dispatch(fuckthisromiiknowwhatimdoing())
+    // dispatch(onLogout())
     navigate('/')
   }
 

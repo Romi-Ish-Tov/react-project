@@ -78,7 +78,7 @@ const VacationCardsContainer = (): JSX.Element => {
     return (
         <div>
             <div className="vacation-cards-container">
-                <NewVacation></NewVacation>
+                {userType == 'admin' && <NewVacation></NewVacation> }
                 {stateVacationsArray.map((item: any, index: number) => {
                     { dateString = (`${item.startDate.substring(0, 10).replace(/-/g, '/')} - ${item.returnDate.substring(0, 10).replace(/-/g, '/')}`) }
                     return (
